@@ -1,0 +1,57 @@
+﻿@using Bhosphor_Ecoshop.Models
+@model Product
+
+@{
+    ViewData["Title"] = "Product details";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Name
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="@Model.ImageURL" width="100%" alt="@Model.Name">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">@Model.Description</p>
+                        <p class="card-text">
+                            <b>Category: </b>
+                            <a asp-controller="Categories" asp-action="Details" asp-route-id="@Model.CategoryId">
+                                @Model.Category.Name
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <b>Seller: </b>
+                            <a asp-controller="Sellers" asp-action="Details" asp-route-id="@Model.SellerId">
+                                @Model.Seller.FirstName @Model.Seller.LastName
+                            </a>
+                        </p>
+                        <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                                Back to List
+                            </a>
+                            <a class="btn btn-success text-white" 
+                               asp-controller="Orders" asp-action="AddItemToWishlist" asp-route-id="@Model.Id"><i class="bi bi-Wishlist-plus"></i> Add to Wishlist (Price @Model.Price.ToString("c"))</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
